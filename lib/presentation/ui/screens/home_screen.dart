@@ -1,10 +1,11 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:crafty_bay/presentation/ui/utility/app_colors.dart';
 import 'package:crafty_bay/presentation/ui/utility/image_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../widgets/category_card_widget.dart';
 import '../widgets/circular_icon_button.dart';
+import '../widgets/remarks_title.dart';
 import '../widgets/home_widgets/home_slider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -56,7 +57,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     fillColor: Colors.grey.shade200,
                     filled: true,
                     hintText: 'Search',
-                    border: const OutlineInputBorder(borderSide: BorderSide.none),
+                    border:
+                        const OutlineInputBorder(borderSide: BorderSide.none),
                     enabledBorder:
                         const OutlineInputBorder(borderSide: BorderSide.none),
                     focusedBorder:
@@ -65,7 +67,41 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 10,
               ),
-              HomeSlider()
+              const HomeSlider(),
+              const SizedBox(
+                height: 8,
+              ),
+              RemarksTitle(
+                title: 'All Categories',
+                onTap: () {},
+              ),
+              const SizedBox(height: 8,),
+              SizedBox(
+                height: 90,
+                child: ListView.builder(
+                    itemCount: 10,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return const CategoryCardWidget();
+                    }),
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              RemarksTitle(
+                title: 'Popular',
+                onTap: () {},
+              ),
+              const SizedBox(height: 8,),
+              SizedBox(
+                height: 90,
+                child: ListView.builder(
+                    itemCount: 10,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return const CategoryCardWidget();
+                    }),
+              )
             ],
           ),
         ),
@@ -73,5 +109,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
 
