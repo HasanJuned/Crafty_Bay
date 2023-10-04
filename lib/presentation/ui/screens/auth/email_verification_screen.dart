@@ -66,7 +66,10 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                   },
                   child: const Text('Next'),
                 ),
-              )
+              ),
+              const SizedBox(
+                height: 120,
+              ),
             ],
           ),
         ),

@@ -1,6 +1,9 @@
+import 'package:crafty_bay/presentation/ui/screens/auth/profile_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../utility/image_assets.dart';
 
@@ -12,6 +15,9 @@ class OTPVerificationScreen extends StatefulWidget {
 }
 
 class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
+
+  final TextEditingController _otpTEController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,16 +54,45 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                     ?.copyWith(color: Colors.grey),
               ),
               const SizedBox(
-                height: 18,
+                height: 24,
               ),
-              TextFormField(),
+              PinCodeTextField(
+                controller: _otpTEController,
+                length: 4,
+                obscureText: false,
+                animationType: AnimationType.fade,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                keyboardType: TextInputType.number,
+                pinTheme: PinTheme(
+                  shape: PinCodeFieldShape.box,
+                  borderRadius: BorderRadius.circular(5),
+                  fieldHeight: 50,
+                  fieldWidth: 50,
+                  activeFillColor: Colors.white,
+                  inactiveFillColor: Colors.white,
+                  selectedFillColor: Colors.white,
+                  activeColor: AppColors.primaryColor,
+                  inactiveColor: AppColors.primaryColor,
+                  selectedColor: Colors.green,
+                ),
+                animationDuration: const Duration(milliseconds: 300),
+                enableActiveFill: true,
+                onCompleted: (v) {},
+                onChanged: (value) {},
+                beforeTextPaste: (text) {
+                  return true;
+                },
+                appContext: context,
+              ),
               const SizedBox(
                 height: 10,
               ),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.offAll(const ProfileScreen());
+                  },
                   child: const Text('Next'),
                 ),
               ),
@@ -81,7 +116,10 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                 onPressed: () {},
                 style: TextButton.styleFrom(foregroundColor: Colors.grey),
                 child: const Text('Resend'),
-              )
+              ),
+              const SizedBox(
+                height: 100,
+              ),
             ],
           ),
         ),
