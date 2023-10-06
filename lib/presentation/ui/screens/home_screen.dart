@@ -1,4 +1,5 @@
 import 'package:crafty_bay/presentation/ui/screens/categories_screen.dart';
+import 'package:crafty_bay/presentation/ui/screens/product_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/app_colors.dart';
 import 'package:crafty_bay/presentation/ui/utility/image_assets.dart';
 import 'package:flutter/material.dart';
@@ -97,7 +98,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               RemarksTitle(
                 title: 'Popular',
-                onTap: () {},
+                onTap: () {
+                  Get.to(ProductListScreen());
+                },
               ),
               SizedBox(
                 height: 170,
@@ -108,12 +111,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     return const ProductCard();
                   },
                 ),
-              ),const SizedBox(
+              ),
+              const SizedBox(
                 height: 8,
               ),
               RemarksTitle(
                 title: 'Special',
-                onTap: () {},
+                onTap: () {
+                  Get.to(ProductListScreen());
+                },
               ),
               SizedBox(
                 height: 170,
@@ -124,12 +130,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     return const ProductCard();
                   },
                 ),
-              ),const SizedBox(
+              ),
+              const SizedBox(
                 height: 8,
               ),
               RemarksTitle(
                 title: 'New',
-                onTap: () {},
+                onTap: () {
+                  Get.to(ProductListScreen());
+                },
               ),
               SizedBox(
                 height: 170,

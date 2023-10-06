@@ -1,4 +1,6 @@
+import 'package:crafty_bay/presentation/ui/screens/categories_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/home_screen.dart';
+import 'package:crafty_bay/presentation/ui/screens/wishlist_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -13,9 +15,9 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
   int _selectedIndex = 0;
   List<Widget> _screens = [
     HomeScreen(),
+    CategoriesScreen(),
     HomeScreen(),
-    HomeScreen(),
-    HomeScreen(),
+    WishListScreen(),
   ];
 
   @override
