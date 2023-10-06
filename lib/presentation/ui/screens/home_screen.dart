@@ -1,3 +1,4 @@
+import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_bar_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/categories_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/product_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/app_colors.dart';
@@ -78,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
               RemarksTitle(
                 title: 'All Categories',
                 onTap: () {
-                  Get.to(CategoriesScreen());
+                  Get.find<MainBottomNavController>().changeScreen(1);
                 },
               ),
               const SizedBox(

@@ -1,7 +1,10 @@
+import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_bar_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/splash_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/get.dart';
+
+import 'state_holder_binders.dart';
 
 class CraftyBay extends StatelessWidget {
   const CraftyBay({Key? key}) : super(key: key);
@@ -9,6 +12,7 @@ class CraftyBay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      initialBinding: GetXBindings(),
       debugShowCheckedModeBanner: false,
       home: const SplashScreen(),
       theme: ThemeData(
