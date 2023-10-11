@@ -1,3 +1,4 @@
+
 import 'package:crafty_bay/presentation/ui/widgets/custom_stepper.dart';
 import 'package:crafty_bay/presentation/ui/widgets/home_widgets/product_image_slider.dart';
 import 'package:flutter/material.dart';
@@ -40,13 +41,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           children: [
             Stack(
               children: [
-                ProductImageSlider(),
+                const ProductImageSlider(),
                 AppBar(
-                  title: Text(
+                  title: const Text(
                     'Product Details',
                     style: TextStyle(color: Colors.black54),
                   ),
-                  leading: BackButton(
+                  leading: const BackButton(
                     color: Colors.black54,
                   ),
                   backgroundColor: Colors.transparent,
@@ -54,7 +55,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Expanded(
@@ -66,7 +67,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     children: [
                       Row(
                         children: [
-                          Expanded(
+                          const Expanded(
                             child: Text(
                               'Address shoe AK3343 - Black Adition',
                               style: TextStyle(
@@ -107,7 +108,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           ),
                           TextButton(
                             onPressed: () {},
-                            child: Text('Review'),
+                            child: const Text('Review'),
                           ),
                           const Card(
                             color: AppColors.primaryColor,
@@ -122,12 +123,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           )
                         ],
                       ),
-                      Text(
+                      const Text(
                         'Color',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w700),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       SizedBox(
@@ -148,7 +149,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 radius: 15,
                                 backgroundColor: colors[index],
                                 child: _selectedColor == index
-                                    ? Icon(Icons.done, color: Colors.white)
+                                    ? const Icon(Icons.done, color: Colors.white)
                                     : null,
                               ),
                             );
@@ -158,15 +159,15 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           },
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 14,
                       ),
-                      Text(
+                      const Text(
                         'Size',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w700),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       SizedBox(
@@ -184,7 +185,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 }
                               },
                               child: Container(
-                                padding: EdgeInsets.symmetric(horizontal: 8),
+                                padding: const EdgeInsets.symmetric(horizontal: 8),
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(
                                     border: Border.all(color: Colors.grey),
@@ -201,18 +202,18 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           },
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 16,
                       ),
-                      Text(
+                      const Text(
                         'Description',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w700),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 4,
                       ),
-                      Text(
+                      const Text(
                           '''Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum''')
                     ],
                   ),
@@ -220,10 +221,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
               decoration: BoxDecoration(
                 color: AppColors.primaryColor.withOpacity(0.2),
-                borderRadius: BorderRadius.only(topRight: Radius.circular(16), topLeft: Radius.circular(16))
+                borderRadius: const BorderRadius.only(topRight: Radius.circular(16), topLeft: Radius.circular(16))
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -252,7 +253,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     width: 120,
                     child: ElevatedButton(
                       onPressed: () {},
-                      child: Text('Add to Cart'),
+                      child: const Text('Add to Cart'),
                     ),
                   )
                 ],
