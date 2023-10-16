@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> gotoNextScreen() async {
     Future.delayed(const Duration(seconds: 2)).then((value) {
-      Get.off(const MainBottomNavBar());
+      Get.off(const EmailVerificationScreen());
     });
   }
 

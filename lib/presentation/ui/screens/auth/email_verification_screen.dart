@@ -14,63 +14,81 @@ class EmailVerificationScreen extends StatefulWidget {
 }
 
 class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
+
+  final TextEditingController emailController = TextEditingController();
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Center(
-                child: SvgPicture.asset(
-                  ImageAssets.craftyBayLogoSVG,
-                  width: 100,
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(
+                  child: SvgPicture.asset(
+                    ImageAssets.craftyBayLogoSVG,
+                    width: 100,
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Text(
-                'Welcome Back',
-                style: Theme.of(context)
-                    .textTheme
-                    .titleLarge
-                    ?.copyWith(fontSize: 24),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              Text(
-                'Please Enter Your Email Address',
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium
-                    ?.copyWith(color: Colors.grey),
-              ),
-              const SizedBox(
-                height: 18,
-              ),
-              TextFormField(
-                decoration: const InputDecoration(hintText: 'Email'),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Get.to(const OTPVerificationScreen());
+                const SizedBox(
+                  height: 16,
+                ),
+                Text(
+                  'Welcome Back',
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(fontSize: 24),
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                Text(
+                  'Please Enter Your Email Address',
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleMedium
+                      ?.copyWith(color: Colors.grey),
+                ),
+                const SizedBox(
+                  height: 18,
+                ),
+                TextFormField(
+                  decoration: const InputDecoration(hintText: 'Email'),
+                  validator: (String? text){
+                    if(text!.isEmpty){
+                      return 'Enter email';
+                    }
+                    if(text.isEmail == false){
+                      return 'Enter valid email';
+                    }
+                    return null;
                   },
-                  child: const Text('Next'),
                 ),
-              ),
-              const SizedBox(
-                height: 120,
-              ),
-            ],
+                const SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        Get.to(const OTPVerificationScreen());
+                      }
+                    },
+                    child: const Text('Next'),
+                  ),
+                ),
+                const SizedBox(
+                  height: 120,
+                ),
+              ],
+            ),
           ),
         ),
       ),
