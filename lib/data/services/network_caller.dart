@@ -6,12 +6,11 @@ import '../models/network_response.dart';
 
 class NetworkCaller {
   /// get request method
-  static Future<NetworkResponse> getRequest(String url) async {
+  Future<NetworkResponse> getRequest(String url) async {
     try {
-      Response response = await get(Uri.parse(url),
-          headers: {
-            // 'token': AuthController.accessToken.toString()
-          });
+      Response response = await get(Uri.parse(url), headers: {
+        // 'token': AuthController.accessToken.toString()
+      });
       log(response.statusCode.toString());
       log(response.body);
       if (response.statusCode == 200) {
@@ -28,8 +27,8 @@ class NetworkCaller {
     return NetworkResponse(false, -1, null);
   }
 
-  static Future<NetworkResponse> postRequest(String url,
-      Map<String, dynamic> body,
+  static Future<NetworkResponse> postRequest(
+      String url, Map<String, dynamic> body,
       {bool isLogin = false}) async {
     try {
       Response response = await post(

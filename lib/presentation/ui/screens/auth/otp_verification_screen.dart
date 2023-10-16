@@ -117,9 +117,6 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                 style: TextButton.styleFrom(foregroundColor: Colors.grey),
                 child: const Text('Resend'),
               ),
-              const SizedBox(
-                height: 100,
-              ),
             ],
           ),
         ),
