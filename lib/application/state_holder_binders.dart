@@ -1,3 +1,4 @@
+import 'package:crafty_bay/presentation/state_holders/otp_verification_controller.dart';
 import 'package:get/get.dart';
 
 import '../presentation/state_holders/email_verification_controller.dart';
@@ -8,6 +9,7 @@ class GetXBindings extends Bindings{
   void dependencies() {
     Get.put(MainBottomNavController());
     Get.put(EmailVerificationController());
+    Get.put(OTPVerificationController());
   }
 
 }

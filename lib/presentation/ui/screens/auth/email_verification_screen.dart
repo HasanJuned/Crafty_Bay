@@ -77,24 +77,22 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                 SizedBox(
                   width: double.infinity,
                   child: GetBuilder<EmailVerificationController>(
-                      builder: (controller) {
-                    if (controller.emailVerificationInProgress) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
+                    builder: (controller) {
+                      if (controller.emailVerificationInProgress) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      return ElevatedButton(
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            verifyEmail(controller);
+                          }
+                        },
+                        child: const Text('Next'),
                       );
-                    }
-                    return ElevatedButton(
-                      onPressed: () async {
-                        if (_formKey.currentState!.validate()) {
-                          verifyEmail(controller);
-                        }
-                      },
-                      child: const Text('Next'),
-                    );
-                  }),
-                ),
-                const SizedBox(
-                  height: 120,
+                    },
+                  ),
                 ),
               ],
             ),
@@ -109,7 +107,9 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
 
     final response = await controller.verifyEmail(emailController.text.trim());
     if (response) {
-      Get.to(const OTPVerificationScreen());
+      Get.to(
+        OTPVerificationScreen(email: emailController.text),
+      );
     } else {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
