@@ -9,7 +9,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import '../../utility/image_assets.dart';
 
 class OTPVerificationScreen extends StatefulWidget {
-  final String email;
+  final String email; //
 
   const OTPVerificationScreen({Key? key, required this.email})
       : super(key: key);
