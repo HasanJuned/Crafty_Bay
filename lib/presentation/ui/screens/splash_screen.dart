@@ -1,7 +1,8 @@
+import 'package:crafty_bay/presentation/state_holders/auth_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/auth/email_verification_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/auth/otp_verification_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/home_screen.dart';
-import 'package:crafty_bay/presentation/ui/screens/main_bottom_nav_bar.dart';
+import 'package:crafty_bay/presentation/ui/screens/main_bottom_nav_bar_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/image_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -22,8 +23,11 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> gotoNextScreen() async {
+    await AuthController.getAccessToken();
     Future.delayed(const Duration(seconds: 2)).then((value) {
-      Get.off(const EmailVerificationScreen());
+      Get.off(AuthController.isLoggedIn()
+          ? const MainBottomNavBarScreen()
+          : const EmailVerificationScreen());
     });
   }
 

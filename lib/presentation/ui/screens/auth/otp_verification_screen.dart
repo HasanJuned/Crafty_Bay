@@ -1,5 +1,6 @@
 import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_bar_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/otp_verification_controller.dart';
+import 'package:crafty_bay/presentation/ui/screens/main_bottom_nav_bar_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -147,7 +148,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
     final response =
         await controller.verifyOtp(widget.email, _otpTEController.text);
     if (response) {
-      Get.to(MainBottomNavController());
+      Get.offAll(const MainBottomNavBarScreen());
     } else {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(

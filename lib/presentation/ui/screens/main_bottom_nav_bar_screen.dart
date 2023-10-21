@@ -7,14 +7,14 @@ import 'package:crafty_bay/presentation/ui/utility/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MainBottomNavBar extends StatefulWidget {
-  const MainBottomNavBar({Key? key}) : super(key: key);
+class MainBottomNavBarScreen extends StatefulWidget {
+  const MainBottomNavBarScreen({Key? key}) : super(key: key);
 
   @override
-  State<MainBottomNavBar> createState() => _MainBottomNavBarState();
+  State<MainBottomNavBarScreen> createState() => _MainBottomNavBarScreenState();
 }
 
-class _MainBottomNavBarState extends State<MainBottomNavBar> {
+class _MainBottomNavBarScreenState extends State<MainBottomNavBarScreen> {
 
   final List<Widget> _screens = const [
     HomeScreen(),
