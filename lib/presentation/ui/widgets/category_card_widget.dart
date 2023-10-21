@@ -1,9 +1,11 @@
+import 'package:crafty_bay/data/models/category_data.dart';
 import 'package:flutter/material.dart';
 
 import '../utility/app_colors.dart';
 class CategoryCardWidget extends StatelessWidget {
+  final CategoryData categoryData;
   const CategoryCardWidget({
-    Key? key,
+    Key? key, required this.categoryData,
   }) : super(key: key);
 
   @override
@@ -13,20 +15,18 @@ class CategoryCardWidget extends StatelessWidget {
       child: Column(
         children: [
           Container(
+            height: 60,
+            width: 60,
             margin: const EdgeInsets.symmetric(horizontal: 8),
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
                 color:
                 AppColors.primaryColor.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(8)),
-            child: const Icon(
-              Icons.shop,
-              color: AppColors.primaryColor,
-              size: 32,
-            ),
+            child: Image.network(categoryData.categoryImg ?? ''),
           ),
           const SizedBox(height: 4,),
-          const Text('Electronics', style: TextStyle(
+          Text(categoryData.categoryName ?? '', style: const TextStyle(
               color: AppColors.primaryColor,
               letterSpacing: 0.4,
               fontSize: 15
