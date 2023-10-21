@@ -73,16 +73,18 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 10,
               ),
-              GetBuilder<HomeSliderController>(builder: (homeSliderController) {
-                if (homeSliderController.getHomeSliderInProgress) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
+              GetBuilder<HomeSliderController>(
+                builder: (homeSliderController) {
+                  if (homeSliderController.getHomeSliderInProgress) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  return HomeSlider(
+                    sliders: homeSliderController.sliderModel.data ?? [],
                   );
-                }
-                return HomeSlider(
-                  sliders: homeSliderController.sliderModel.data ?? [],
-                );
-              }),
+                },
+              ),
               const SizedBox(
                 height: 8,
               ),

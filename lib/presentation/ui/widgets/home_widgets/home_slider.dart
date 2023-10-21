@@ -22,19 +22,21 @@ class _HomeSliderState extends State<HomeSlider> {
       children: [
         CarouselSlider(
           options: CarouselOptions(
-              height: 160.0,
-              autoPlay: true,
-              autoPlayInterval: const Duration(seconds: 3),
-              onPageChanged: (int page, _) {
-                _selectedSlider.value = page;
-              }),
+            height: 160.0,
+            autoPlay: true,
+            autoPlayInterval: const Duration(seconds: 3),
+            onPageChanged: (int page, _) {
+              _selectedSlider.value = page;
+            },
+          ),
           items: widget.sliders.map((sliderData) {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
                   width: MediaQuery.of(context).size.width,
                   margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                  decoration: BoxDecoration(color: AppColors.primaryColor.withOpacity(0.7)),
+                  decoration: BoxDecoration(
+                      color: AppColors.primaryColor.withOpacity(0.7)),
                   alignment: Alignment.center,
                   child: Stack(
                     alignment: Alignment.bottomRight,
@@ -42,12 +44,14 @@ class _HomeSliderState extends State<HomeSlider> {
                       Image.network(sliderData.image ?? ''),
                       Positioned(
                         bottom: 0,
-                        child: Text(sliderData.title ?? '', style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 1
-                        ),),
+                        child: Text(
+                          sliderData.title ?? '',
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 1),
+                        ),
                       )
                     ],
                   ),
