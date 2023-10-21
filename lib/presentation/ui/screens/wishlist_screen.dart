@@ -16,7 +16,7 @@ class _WishListScreenState extends State<WishListScreen> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async{
+      onWillPop: () async {
         Get.find<MainBottomNavController>().backToHome();
         return false;
       },
@@ -36,11 +36,11 @@ class _WishListScreenState extends State<WishListScreen> {
           child: GridView.builder(
               itemCount: 200,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  childAspectRatio: 0.85
-              ),
-              itemBuilder: (context, index){
-                return const FittedBox(child: ProductCard());
+                  crossAxisCount: 3, childAspectRatio: 0.85),
+              itemBuilder: (context, index) {
+                return const FittedBox(
+                 // child: ProductCard(),
+                );
               }),
         ),
       ),

@@ -1,6 +1,7 @@
 import 'package:crafty_bay/presentation/state_holders/category_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/home_slider_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_bar_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/product_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/cart_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/categories_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/home_screen.dart';
@@ -30,6 +31,7 @@ class _MainBottomNavBarScreenState extends State<MainBottomNavBarScreen> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Get.find<HomeSliderController>().getHomeSliders();
       Get.find<CategoryController>().getCategory();
+      Get.find<ProductController>().getPopularProducts();
     });
     super.initState();
 

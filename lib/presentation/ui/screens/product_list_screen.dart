@@ -29,11 +29,11 @@ class _ProductListScreenState extends State<ProductListScreen> {
         child: GridView.builder(
             itemCount: 200,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                childAspectRatio: 0.85
-            ),
-            itemBuilder: (context, index){
-              return const FittedBox(child: ProductCard());
+                crossAxisCount: 3, childAspectRatio: 0.85),
+            itemBuilder: (context, index) {
+              return const FittedBox(
+               // child: ProductCard(),
+              );
             }),
       ),
     );

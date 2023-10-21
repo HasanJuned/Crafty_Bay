@@ -1,6 +1,7 @@
 import 'package:crafty_bay/presentation/state_holders/category_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/home_slider_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_bar_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/product_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/categories_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/product_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/app_colors.dart';
@@ -129,12 +130,24 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(
                 height: 170,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 20,
-                  itemBuilder: (builder, index) {
-                    return const ProductCard();
-                  },
+                child: GetBuilder<ProductController>(
+                  builder: (productController) {
+                    if (productController.getPopularProductInProgress) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    return ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: productController.productModel.data?.length ?? 0,
+                      itemBuilder: (builder, index) {
+                        return ProductCard(
+                          productData: productController.productModel.data![index],
+
+                        );
+                      },
+                    );
+                  }
                 ),
               ),
               const SizedBox(
@@ -148,13 +161,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(
                 height: 170,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 20,
-                  itemBuilder: (builder, index) {
-                    return const ProductCard();
-                  },
-                ),
+                // child: ListView.builder(
+                //   scrollDirection: Axis.horizontal,
+                //   itemCount: 20,
+                //   itemBuilder: (builder, index) {
+                //     return const ProductCard();
+                //   },
+                // ),
               ),
               const SizedBox(
                 height: 8,
@@ -167,13 +180,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(
                 height: 170,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 20,
-                  itemBuilder: (builder, index) {
-                    return const ProductCard();
-                  },
-                ),
+                // child: ListView.builder(
+                //   scrollDirection: Axis.horizontal,
+                //   itemCount: 20,
+                //   itemBuilder: (builder, index) {
+                //     return const ProductCard();
+                //   },
+                // ),
               ),
             ],
           ),
