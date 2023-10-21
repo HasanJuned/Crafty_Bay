@@ -1,10 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../data/models/slider_data.dart';
 import '../../utility/app_colors.dart';
 
 class HomeSlider extends StatefulWidget {
-  const HomeSlider({Key? key}) : super(key: key);
+  final List<SliderData> sliders;
+
+  const HomeSlider({Key? key, required this.sliders}) : super(key: key);
 
   @override
   State<HomeSlider> createState() => _HomeSliderState();
@@ -25,18 +28,30 @@ class _HomeSliderState extends State<HomeSlider> {
               onPageChanged: (int page, _) {
                 _selectedSlider.value = page;
               }),
-          items: [1, 2, 3, 4, 5].map((i) {
+          items: widget.sliders.map((sliderData) {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                    decoration: const BoxDecoration(color: Colors.amber),
-                    alignment: Alignment.center,
-                    child: Text(
-                      'text $i',
-                      style: const TextStyle(fontSize: 16.0),
-                    ));
+                  width: MediaQuery.of(context).size.width,
+                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                  decoration: BoxDecoration(color: AppColors.primaryColor.withOpacity(0.7)),
+                  alignment: Alignment.center,
+                  child: Stack(
+                    alignment: Alignment.bottomRight,
+                    children: [
+                      Image.network(sliderData.image ?? ''),
+                      Positioned(
+                        bottom: 0,
+                        child: Text(sliderData.title ?? '', style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 1
+                        ),),
+                      )
+                    ],
+                  ),
+                );
               },
             );
           }).toList(),
@@ -50,7 +65,7 @@ class _HomeSliderState extends State<HomeSlider> {
             return Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < widget.sliders.length; i++)
                   Container(
                     height: 10,
                     width: 10,
