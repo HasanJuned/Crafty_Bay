@@ -1,7 +1,8 @@
 import 'package:crafty_bay/presentation/state_holders/category_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/home_slider_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_bar_controller.dart';
-import 'package:crafty_bay/presentation/state_holders/product_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/new_product_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/special_product_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/categories_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/product_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/app_colors.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../../state_holders/popular_product_controller.dart';
 import '../widgets/category_card_widget.dart';
 import '../widgets/circular_icon_button.dart';
 import '../widgets/product_card.dart';
@@ -130,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(
                 height: 170,
-                child: GetBuilder<ProductController>(
+                child: GetBuilder<PopularProductController>(
                   builder: (productController) {
                     if (productController.getPopularProductInProgress) {
                       return const Center(
@@ -161,13 +163,25 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(
                 height: 170,
-                // child: ListView.builder(
-                //   scrollDirection: Axis.horizontal,
-                //   itemCount: 20,
-                //   itemBuilder: (builder, index) {
-                //     return const ProductCard();
-                //   },
-                // ),
+                child: GetBuilder<SpecialProductController>(
+                    builder: (specialProductController) {
+                      if (specialProductController.getSpecialProductInProgress) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      return ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: specialProductController.productModel.data?.length ?? 0,
+                        itemBuilder: (builder, index) {
+                          return ProductCard(
+                            productData: specialProductController.productModel.data![index],
+
+                          );
+                        },
+                      );
+                    }
+                ),
               ),
               const SizedBox(
                 height: 8,
@@ -180,13 +194,25 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(
                 height: 170,
-                // child: ListView.builder(
-                //   scrollDirection: Axis.horizontal,
-                //   itemCount: 20,
-                //   itemBuilder: (builder, index) {
-                //     return const ProductCard();
-                //   },
-                // ),
+                child: GetBuilder<NewProductController>(
+                    builder: (newProductController) {
+                      if (newProductController.getNewProductInProgress) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      return ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: newProductController.productModel.data?.length ?? 0,
+                        itemBuilder: (builder, index) {
+                          return ProductCard(
+                            productData: newProductController.productModel.data![index],
+
+                          );
+                        },
+                      );
+                    }
+                ),
               ),
             ],
           ),
