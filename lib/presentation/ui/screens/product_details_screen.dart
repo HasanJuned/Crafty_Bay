@@ -1,12 +1,16 @@
+import 'package:crafty_bay/data/models/product_details.dart';
+import 'package:crafty_bay/presentation/state_holders/product_details_controller.dart';
 import 'package:crafty_bay/presentation/ui/widgets/custom_stepper.dart';
 import 'package:crafty_bay/presentation/ui/widgets/home_widgets/product_image_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../utility/app_colors.dart';
 import '../widgets/size_picker.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  const ProductDetailsScreen({Key? key}) : super(key: key);
+  final int productId;
+  const ProductDetailsScreen({Key? key, required this.productId}) : super(key: key);
 
   @override
   State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
@@ -34,21 +38,45 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   int _selectedSizes = 0;
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Get.find<ProductDetailsController>().getProductDetails(widget.productId);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Stack(
-              children: [const ProductImageSlider(), productDetailsAppBar],
+      body: GetBuilder<ProductDetailsController>(
+        builder: (productDetailsController) {
+          if(productDetailsController.getProductDetailsInProgress){
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          return SafeArea(
+            child: Column(
+              children: [
+                Stack(
+                  children: [ProductImageSlider(
+                    imageList: [
+                      productDetailsController.productDetails.img1 ?? '',
+                      productDetailsController.productDetails.img2 ?? '',
+                      productDetailsController.productDetails.img3 ?? '',
+                      productDetailsController.productDetails.img4 ?? '',
+                    ],
+                  ), productDetailsAppBar],
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                productDetails(productDetailsController.productDetails),
+                addToCartBottomContainer
+              ],
             ),
-            const SizedBox(
-              height: 8,
-            ),
-            productDetails,
-            addToCartBottomContainer
-          ],
-        ),
+          );
+        }
       ),
     );
   }
@@ -108,7 +136,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     );
   }
 
-  Expanded get productDetails {
+  Expanded productDetails(ProductDetails productDetails) {
     return Expanded(
       child: SingleChildScrollView(
         child: Padding(
@@ -118,10 +146,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             children: [
               Row(
                 children: [
-                  const Expanded(
+                  Expanded(
                     child: Text(
-                      'Address shoe AK3343 - Black Adition',
-                      style: TextStyle(
+                      productDetails.product?.title ?? '',
+                      style: const TextStyle(
                           fontWeight: FontWeight.w700,
                           letterSpacing: 0.6,
                           fontSize: 18),
@@ -142,15 +170,15 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 children: [
                   Wrap(
                     crossAxisAlignment: WrapCrossAlignment.center,
-                    children: const [
-                      Icon(
+                    children: [
+                      const Icon(
                         Icons.star,
                         size: 18,
                         color: Colors.yellow,
                       ),
                       Text(
-                        '4.8',
-                        style: TextStyle(
+                        '${productDetails.product?.star ?? 0}',
+                        style: const TextStyle(
                             fontSize: 15,
                             color: Colors.blueGrey,
                             fontWeight: FontWeight.w600),
@@ -222,7 +250,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               SizedBox(
                 height: 28,
                 child: SizePicker(
-                  sizes: sizes,
+                  sizes: productDetails.size?.split(',') ?? [],
                   onSelected: (int selectedSize) {
                     _selectedSizes = selectedSize;
                   },
@@ -239,9 +267,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               const SizedBox(
                 height: 4,
               ),
-              const Text(
-                  '''Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum''')
-            ],
+              Text(productDetails.product?.shortDes ?? ''),],
           ),
         ),
       ),

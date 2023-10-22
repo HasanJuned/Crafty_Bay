@@ -1,5 +1,6 @@
 import 'package:crafty_bay/presentation/state_holders/new_product_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/otp_verification_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/product_details_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/special_product_controller.dart';
 import 'package:get/get.dart';
 
@@ -20,6 +21,7 @@ class GetXBindings extends Bindings{
     Get.put(PopularProductController());
     Get.put(NewProductController());
     Get.put(SpecialProductController());
+    Get.put(ProductDetailsController());
   }
 
 }
