@@ -19,14 +19,7 @@ class ProductDetailsScreen extends StatefulWidget {
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
-  List<String> sizes = [
-    'S',
-    'M',
-    'L',
-    'XL',
-    'XXL',
-    'XXL',
-  ];
+
 
   int _selectedColor = 0;
   int _selectedSizes = 0;
