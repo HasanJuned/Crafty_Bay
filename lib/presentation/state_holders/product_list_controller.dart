@@ -20,12 +20,11 @@ class ProductListController extends GetxController {
     _productListControllerInProgress = true;
     update();
 
-    final NetworkResponse response =
-    await NetworkCaller().getRequest(Urls.getProductCategoryById(categoryId));
+    final NetworkResponse response = await NetworkCaller()
+        .getRequest(Urls.getProductCategoryById(categoryId));
     _productListControllerInProgress = false;
     if (response.isSuccess) {
-      _productModel =
-          ProductModel.fromJson(response.responseJson ?? {});
+      _productModel = ProductModel.fromJson(response.responseJson ?? {});
       update();
       return true;
     } else {
@@ -33,5 +32,10 @@ class ProductListController extends GetxController {
       update();
       return false;
     }
+  }
+
+  void setProducts(ProductModel productModel) {
+    _productModel = productModel;
+    update();
   }
 }

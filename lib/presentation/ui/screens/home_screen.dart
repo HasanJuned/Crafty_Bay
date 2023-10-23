@@ -130,7 +130,9 @@ class _HomeScreenState extends State<HomeScreen> {
               RemarksTitle(
                 title: 'Popular',
                 onTap: () {
-                  // Get.to(ProductListScreen());
+                   Get.to(ProductListScreen(
+                     productModel: Get.find<PopularProductController>().productModel
+                   ));
                 },
               ),
               SizedBox(
@@ -161,7 +163,10 @@ class _HomeScreenState extends State<HomeScreen> {
               RemarksTitle(
                 title: 'Special',
                 onTap: () {
-                  // Get.to(ProductListScreen());
+                   Get.to(ProductListScreen(
+                       productModel: Get.find<SpecialProductController>().productModel
+
+                   ));
                 },
               ),
               SizedBox(
@@ -192,7 +197,9 @@ class _HomeScreenState extends State<HomeScreen> {
               RemarksTitle(
                 title: 'New',
                 onTap: () {
-                  // Get.to(ProductListScreen());
+                   Get.to(ProductListScreen(
+                     productModel: Get.find<NewProductController>().productModel,
+                   ));
                 },
               ),
               SizedBox(

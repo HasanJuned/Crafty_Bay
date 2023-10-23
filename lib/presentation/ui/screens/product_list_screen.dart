@@ -1,3 +1,4 @@
+import 'package:crafty_bay/data/models/product_model.dart';
 import 'package:crafty_bay/presentation/ui/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,8 +7,9 @@ import '../../state_holders/product_list_controller.dart';
 import '../widgets/category_card_widget.dart';
 
 class ProductListScreen extends StatefulWidget {
-  final int categoryId;
-  const ProductListScreen({Key? key, required this.categoryId}) : super(key: key);
+  final int? categoryId;
+  final ProductModel? productModel;
+  const ProductListScreen({Key? key, this.categoryId, this.productModel}) : super(key: key);
 
   @override
   State<ProductListScreen> createState() => _ProductListScreenState();
@@ -19,7 +21,14 @@ class _ProductListScreenState extends State<ProductListScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Get.find<ProductListController>().getProductByCategory(widget.categoryId);
+      if(widget.categoryId != null) {
+        Get.find<ProductListController>().getProductByCategory(
+            widget.categoryId!);
+      }else if(widget.productModel != null){
+        Get.find<ProductListController>().setProducts(
+            widget.productModel!);
+
+      }
     });
   }
 
