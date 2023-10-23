@@ -1,16 +1,19 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:crafty_bay/application/app.dart';
+import 'package:crafty_bay/presentation/ui/screens/auth/email_verification_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
+import '../../presentation/state_holders/auth_controller.dart';
 import '../models/network_response.dart';
 
 class NetworkCaller {
   /// get request method
   Future<NetworkResponse> getRequest(String url) async {
     try {
-      Response response = await get(Uri.parse(url), headers: {
-        // 'token': AuthController.accessToken.toString()
-      });
+      Response response = await get(Uri.parse(url),
+          headers: {'token': AuthController.accessToken.toString()});
       log(response.statusCode.toString());
       log(response.body);
       if (response.statusCode == 200) {
@@ -27,15 +30,14 @@ class NetworkCaller {
     return NetworkResponse(false, -1, null);
   }
 
-  static Future<NetworkResponse> postRequest(
-      String url, Map<String, dynamic> body,
+  Future<NetworkResponse> postRequest(String url, Map<String, dynamic> body,
       {bool isLogin = false}) async {
     try {
       Response response = await post(
         Uri.parse(url),
         headers: {
           'Content-Type': 'application/json',
-          //'token': AuthController.accessToken.toString()
+          'token': AuthController.accessToken.toString()
         },
         body: jsonEncode(body),
       );
@@ -61,11 +63,11 @@ class NetworkCaller {
   }
 
   static Future<void> gotoLogin() async {
-    //   await AuthController.clear();
-    //   Navigator.pushAndRemoveUntil(
-    //       CraftBay.globalKey.currentContext!,
-    //       MaterialPageRoute(builder: (context) => const EmailVerificationScreen()),
-    //           (route) => false);
-    // }
+    await AuthController.clearUserInfo();
+    Navigator.pushAndRemoveUntil(
+        CraftyBay.globalKey.currentContext!,
+        MaterialPageRoute(
+            builder: (context) => const EmailVerificationScreen()),
+        (route) => false);
   }
 }
