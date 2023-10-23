@@ -1,5 +1,6 @@
 import 'package:crafty_bay/presentation/state_holders/category_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_bar_controller.dart';
+import 'package:crafty_bay/presentation/ui/screens/product_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -59,6 +60,9 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
                     child: CategoryCardWidget(
                       categoryData:
                           categoryController.categoryModel.data![index],
+                      onTap: (){
+                        Get.to(ProductListScreen(categoryId:  categoryController.categoryModel.data![index].id!));
+                      },
                     ),
                   );
                 },

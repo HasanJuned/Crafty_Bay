@@ -116,6 +116,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemBuilder: (context, index) {
                           return CategoryCardWidget(
                             categoryData: categoryController.categoryModel.data![index],
+                            onTap: (){
+                              Get.to(ProductListScreen(categoryId:  categoryController.categoryModel.data![index].id!));
+                            },
                           );
                         });
                   }
@@ -127,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
               RemarksTitle(
                 title: 'Popular',
                 onTap: () {
-                  Get.to(ProductListScreen());
+                  // Get.to(ProductListScreen());
                 },
               ),
               SizedBox(
@@ -158,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
               RemarksTitle(
                 title: 'Special',
                 onTap: () {
-                  Get.to(ProductListScreen());
+                  // Get.to(ProductListScreen());
                 },
               ),
               SizedBox(
@@ -189,7 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
               RemarksTitle(
                 title: 'New',
                 onTap: () {
-                  Get.to(ProductListScreen());
+                  // Get.to(ProductListScreen());
                 },
               ),
               SizedBox(
