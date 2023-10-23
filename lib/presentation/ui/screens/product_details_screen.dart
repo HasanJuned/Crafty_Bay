@@ -11,16 +11,15 @@ import '../widgets/size_picker.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   final int productId;
-  const ProductDetailsScreen({Key? key, required this.productId}) : super(key: key);
+
+  const ProductDetailsScreen({Key? key, required this.productId})
+      : super(key: key);
 
   @override
   State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
-
-
-
   int _selectedColor = 0;
   int _selectedSizes = 0;
 
@@ -36,35 +35,38 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GetBuilder<ProductDetailsController>(
-        builder: (productDetailsController) {
-          if(productDetailsController.getProductDetailsInProgress){
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          return SafeArea(
-            child: Column(
-              children: [
-                Stack(
-                  children: [ProductImageSlider(
+          builder: (productDetailsController) {
+        if (productDetailsController.getProductDetailsInProgress) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        return SafeArea(
+          child: Column(
+            children: [
+              Stack(
+                children: [
+                  ProductImageSlider(
                     imageList: [
                       productDetailsController.productDetails.img1 ?? '',
                       productDetailsController.productDetails.img2 ?? '',
                       productDetailsController.productDetails.img3 ?? '',
                       productDetailsController.productDetails.img4 ?? '',
                     ],
-                  ), productDetailsAppBar],
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                productDetails(productDetailsController.productDetails, productDetailsController.availableColors),
-                addToCartBottomContainer
-              ],
-            ),
-          );
-        }
-      ),
+                  ),
+                  productDetailsAppBar
+                ],
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              productDetails(productDetailsController.productDetails,
+                  productDetailsController.availableColors),
+              addToCartBottomContainer
+            ],
+          ),
+        );
+      }),
     );
   }
 
@@ -254,13 +256,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               const SizedBox(
                 height: 8,
               ),
-              Text(productDetails.product?.shortDes ?? ''),],
+              Text(productDetails.product?.shortDes ?? ''),
+            ],
           ),
         ),
       ),
     );
   }
-
-
-
 }
