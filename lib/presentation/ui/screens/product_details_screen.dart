@@ -88,17 +88,17 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Text(
+            children: [
+              const Text(
                 'Price',
                 style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 4,
               ),
               Text(
-                '\$230',
-                style: TextStyle(
+                '\$${details.product?.price ?? 0}',
+                style: const TextStyle(
                     fontWeight: FontWeight.w700,
                     fontSize: 18,
                     color: AppColors.primaryColor),
@@ -116,18 +116,22 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               }
               return ElevatedButton(
                 onPressed: () {
-                  addToCartController.addToCart(
+                  addToCartController
+                      .addToCart(
                     details.id!,
                     colors[_selectedColor],
                     size[_selectedSizes],
-                  ).then((result) {
-                    if(result){
-                      Get.showSnackbar(const GetSnackBar(
-                        title: 'Added to Cart',
-                        message: 'This product has been added to cart',
-                        duration: Duration(seconds: 2),
-                      ));
-                    }else{
+                  )
+                      .then((result) {
+                    if (result) {
+                      Get.showSnackbar(
+                        const GetSnackBar(
+                          title: 'Added to Cart',
+                          message: 'This product has been added to cart',
+                          duration: Duration(seconds: 2),
+                        ),
+                      );
+                    } else {
                       Get.showSnackbar(const GetSnackBar(
                         title: 'Failed to add cart',
                         message: 'Try again!',

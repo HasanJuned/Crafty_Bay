@@ -5,6 +5,7 @@ import 'package:crafty_bay/presentation/state_holders/special_product_controller
 import 'package:get/get.dart';
 
 import '../presentation/state_holders/add_to_cart_controller.dart';
+import '../presentation/state_holders/cart_list_controller.dart';
 import '../presentation/state_holders/category_controller.dart';
 import '../presentation/state_holders/email_verification_controller.dart';
 import '../presentation/state_holders/home_slider_controller.dart';
@@ -26,6 +27,7 @@ class GetXBindings extends Bindings{
     Get.put(ProductDetailsController());
     Get.put(AddToCartController());
     Get.put(ProductListController());
+    Get.put(CartListController());
   }
 
 }

@@ -21,7 +21,6 @@ class AddToCartController extends GetxController {
         {"product_id": productId, "color": color, "size": size});
     _addToCartInProgress = false;
     if (response.isSuccess) {
-      _message = response.responseJson?['data'] ?? '';
       update();
       return true;
     } else {

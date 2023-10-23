@@ -1,11 +1,9 @@
 import 'package:crafty_bay/data/models/product_data.dart';
 import 'package:crafty_bay/presentation/ui/screens/product_details_screen.dart';
-import 'package:crafty_bay/presentation/ui/screens/product_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../utility/app_colors.dart';
-import '../utility/image_assets.dart';
 
 class ProductCard extends StatelessWidget {
   final ProductData productData;
