@@ -5,6 +5,7 @@ import 'package:crafty_bay/presentation/ui/widgets/home_widgets/product_image_sl
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../data/utility/color_extension.dart';
 import '../utility/app_colors.dart';
 import '../widgets/size_picker.dart';
 
@@ -17,13 +18,6 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
-  List<Color> colors = [
-    Colors.deepPurple,
-    Colors.blueAccent,
-    Colors.green,
-    Colors.grey,
-    Colors.redAccent,
-  ];
 
   List<String> sizes = [
     'S',
@@ -71,7 +65,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 const SizedBox(
                   height: 8,
                 ),
-                productDetails(productDetailsController.productDetails),
+                productDetails(productDetailsController.productDetails, productDetailsController.availableColors),
                 addToCartBottomContainer
               ],
             ),
@@ -136,7 +130,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     );
   }
 
-  Expanded productDetails(ProductDetails productDetails) {
+  Expanded productDetails(ProductDetails productDetails, List<String> colors) {
     return Expanded(
       child: SingleChildScrollView(
         child: Padding(
@@ -213,7 +207,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 height: 28,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
-                  itemCount: colors.length,
+                  itemCount: productDetails.color?.split(',').length ?? 0,
                   itemBuilder: (context, index) {
                     return InkWell(
                       borderRadius: BorderRadius.circular(25),
@@ -225,7 +219,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       },
                       child: CircleAvatar(
                         radius: 15,
-                        backgroundColor: colors[index],
+                        backgroundColor: HexColor.fromHex(colors[index]),
                         child: _selectedColor == index
                             ? const Icon(Icons.done, color: Colors.white)
                             : null,
@@ -265,7 +259,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
               ),
               const SizedBox(
-                height: 4,
+                height: 8,
               ),
               Text(productDetails.product?.shortDes ?? ''),],
           ),
@@ -273,4 +267,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       ),
     );
   }
+
+
+
 }
