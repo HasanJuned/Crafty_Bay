@@ -36,21 +36,25 @@ class _HomeSliderState extends State<HomeSlider> {
                   width: MediaQuery.of(context).size.width,
                   margin: const EdgeInsets.symmetric(horizontal: 5.0),
                   decoration: BoxDecoration(
-                      color: AppColors.primaryColor.withOpacity(0.7)),
+                      color: AppColors.primaryColor.withOpacity(0.2)),
                   alignment: Alignment.center,
                   child: Stack(
                     alignment: Alignment.bottomRight,
                     children: [
-                      Image.network(sliderData.image ?? ''),
+                      Image.network(sliderData.image ?? '', height: double.infinity,
+                        width: double.infinity,
+                        fit: BoxFit.fitHeight,
+                      ),
                       Positioned(
-                        bottom: 0,
+                        bottom: 3,
+                        right: 5,
                         child: Text(
                           sliderData.title ?? '',
                           style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
+                              color: Colors.black,
+                              fontSize: 18,
                               fontWeight: FontWeight.w600,
-                              letterSpacing: 1),
+                              letterSpacing: 1.3),
                         ),
                       )
                     ],

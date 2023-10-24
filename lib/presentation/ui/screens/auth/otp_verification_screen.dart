@@ -1,4 +1,3 @@
-import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_bar_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/otp_verification_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/main_bottom_nav_bar_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/app_colors.dart';
@@ -65,7 +64,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                 ),
                 PinCodeTextField(
                   controller: _otpTEController,
-                  length: 4,
+                  length: 6,
                   obscureText: false,
                   animationType: AnimationType.fade,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

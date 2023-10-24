@@ -1,8 +1,7 @@
 import 'package:crafty_bay/presentation/state_holders/cart_list_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_bar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../state_holders/main_bottom_nav_bar_controller.dart';
 import '../utility/app_colors.dart';
 import '../widgets/cart_product_card.dart';
 
@@ -14,13 +13,14 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Get.find<CartListController>().getCartList();
-    });
+    WidgetsBinding.instance.addPostFrameCallback(
+          (_) {
+        Get.find<CartListController>().getCartList();
+      },
+    );
   }
 
   @override
@@ -28,84 +28,97 @@ class _CartScreenState extends State<CartScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text(
+        title: const Text(
           'Carts',
-          style: Theme.of(context).textTheme.titleLarge,
+          style: TextStyle(color: Colors.black),
         ),
+        elevation: 2,
         leading: IconButton(
           onPressed: () {
             Get.find<MainBottomNavController>().backToHome();
           },
           icon: const Icon(
-            Icons.arrow_back,
+            Icons.arrow_back_outlined,
             color: Colors.black,
           ),
         ),
       ),
-      body: GetBuilder<CartListController>(
-        builder: (cartListController) {
-          if(cartListController.getCartListInProgress){
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          return Column(
-            children: [
-              Expanded(child: Expanded(
-                child: ListView.builder(
-                  itemCount: cartListController.cartListModel.data?.length ?? 0,
-                  itemBuilder: (context, index) {
-                    return CartProductCard(
-                      cartListData: cartListController.cartListModel.data![index],
-                    );
-                  },
+      body: RefreshIndicator(
+        onRefresh: () async {
+          Get.find<CartListController>().getCartList();
+        },
+        child: GetBuilder<CartListController>(
+          builder: (cartListController) {
+            if (cartListController.getCartListInProgress) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            return Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    itemCount:
+                    cartListController.cartListModel.data?.length ?? 0,
+                    itemBuilder: (context, index) {
+                      return CartProductCard(
+                        cartListData: cartListController.cartListModel.data![index],
+                      );
+                    },
+                  ),
                 ),
-              )),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                decoration: BoxDecoration(
-                    color: AppColors.primaryColor.withOpacity(0.2),
+                Container(
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryColor.withOpacity(0.15),
                     borderRadius: const BorderRadius.only(
-                        topRight: Radius.circular(16),
-                        topLeft: Radius.circular(16))),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Total Price',
-                          style:
-                              TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
-                        ),
-                        const SizedBox(
-                          height: 4,
-                        ),
-                        Text(
-                          '\$ ${cartListController.totalPrice}',
-                          style: const TextStyle(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 18,
-                              color: AppColors.primaryColor),
-                        ),
-                      ],
+                      topRight: Radius.circular(16),
+                      topLeft: Radius.circular(16),
                     ),
-                    SizedBox(
-                      width: 120,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        child: const Text('Add to Cart'),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Total Price',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 4,
+                          ),
+                          Text(
+                            '\$ ${cartListController.totalPrice}',
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.primaryColor,
+                            ),
+                          ),
+                        ],
                       ),
-                    )
-                  ],
-                ),
-              )
-            ],
-          );
-        }
+                      SizedBox(
+                        width: 120,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: const Text('Checkout'),
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            );
+          },
+        ),
       ),
     );
   }
 }
-

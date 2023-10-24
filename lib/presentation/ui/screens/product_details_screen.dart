@@ -6,7 +6,6 @@ import 'package:crafty_bay/presentation/ui/widgets/home_widgets/product_image_sl
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../data/utility/color_extension.dart';
 import '../utility/app_colors.dart';
 import '../widgets/size_picker.dart';
 
@@ -23,6 +22,7 @@ class ProductDetailsScreen extends StatefulWidget {
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   int _selectedColor = 0;
   int _selectedSizes = 0;
+  int quantity = 1;
 
   @override
   void initState() {
@@ -121,6 +121,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     details.id!,
                     colors[_selectedColor],
                     size[_selectedSizes],
+                    quantity
                   )
                       .then((result) {
                     if (result) {
@@ -189,7 +190,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     stepValue: 1,
                     value: 1,
                     onChange: (newValue) {
-                      print(newValue);
+                      quantity = newValue;
                     },
                   ),
                 ],
@@ -239,30 +240,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               ),
               SizedBox(
                 height: 28,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: productDetails.color?.split(',').length ?? 0,
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      borderRadius: BorderRadius.circular(25),
-                      onTap: () {
-                        _selectedColor = index;
-                        if (mounted) {
-                          setState(() {});
-                        }
-                      },
-                      child: CircleAvatar(
-                        radius: 15,
-                        backgroundColor: HexColor.fromHex(colors[index]),
-                        child: _selectedColor == index
-                            ? const Icon(Icons.done, color: Colors.white)
-                            : null,
-                      ),
-                    );
+                child: SizePicker(
+                  sizes: productDetails.color?.split(',') ?? [],
+                  onSelected: (int selectedColor) {
+                    _selectedColor = selectedColor;
                   },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const SizedBox(width: 10);
-                  },
+                  initiallySelected: 0,
                 ),
               ),
               const SizedBox(

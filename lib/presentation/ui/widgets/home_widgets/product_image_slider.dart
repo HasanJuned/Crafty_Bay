@@ -22,7 +22,7 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
       children: [
         CarouselSlider(
           options: CarouselOptions(
-              height: 300.0,
+              height: 259,
               autoPlay: true,
               autoPlayInterval: const Duration(seconds: 3),
               viewportFraction: 1.1,

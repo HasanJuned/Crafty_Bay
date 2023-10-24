@@ -29,7 +29,7 @@ class ProductCard extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                height: 100,
+                height: 90,
                 decoration: BoxDecoration(
                   color: AppColors.primaryColor.withOpacity(0.1),
                   borderRadius: const BorderRadius.only(

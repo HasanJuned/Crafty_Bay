@@ -9,7 +9,7 @@ class CartListData {
   String? createdAt;
   String? updatedAt;
   ProductData? productData;
-  int? numberOfItems;
+  int? quantity;
 
   CartListData(
       {this.id,
@@ -18,6 +18,7 @@ class CartListData {
         this.color,
         this.size,
         this.createdAt,
+        this.quantity,
         this.updatedAt,
         this.productData});
 
@@ -29,7 +30,8 @@ class CartListData {
     size = json['size'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    productData = json['product'];
+    quantity = int.tryParse(json['qty'] ?? 1);
+    productData = json['product'] != null ? ProductData.fromJson(json['product']) : null;
   }
 
   Map<String, dynamic> toJson() {
