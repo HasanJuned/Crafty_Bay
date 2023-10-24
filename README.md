@@ -1,4 +1,4 @@
 # crafty_bay
 
-This is an E-Commerce project. Documentation will coming soon.
+This is an E-Commerce project with payment gateway api implementation. Documentation will coming soon.
 Project ongoing...
