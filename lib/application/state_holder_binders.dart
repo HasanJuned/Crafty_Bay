@@ -9,6 +9,7 @@ import '../presentation/state_holders/cart_list_controller.dart';
 import '../presentation/state_holders/category_controller.dart';
 import '../presentation/state_holders/email_verification_controller.dart';
 import '../presentation/state_holders/home_slider_controller.dart';
+import '../presentation/state_holders/invoice_create_controller.dart';
 import '../presentation/state_holders/main_bottom_nav_bar_controller.dart';
 import '../presentation/state_holders/popular_product_controller.dart';
 import '../presentation/state_holders/product_list_controller.dart';
@@ -28,6 +29,7 @@ class GetXBindings extends Bindings{
     Get.put(AddToCartController());
     Get.put(ProductListController());
     Get.put(CartListController());
+    Get.put(InvoiceCreateController());
   }
 
 }
