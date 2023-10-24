@@ -84,7 +84,9 @@ class _CartProductCardState extends State<CartProductCard> {
                           ),
                         ),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.find<CartListController>().removeFromCart(widget.cartListData.productId!);
+                          },
                           icon: const Icon(Icons.delete_outline),
                         )
                       ],
