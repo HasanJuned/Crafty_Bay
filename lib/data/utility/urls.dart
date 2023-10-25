@@ -8,6 +8,7 @@ class Urls{
   static String getProductsByRemarks(String remarks) => '$baseUrl/ListProductByRemark/$remarks';
   static String getProductDetails(int productId) => '$baseUrl/ProductDetailsById/$productId';
   static String addToCart = '$baseUrl/CreateCartList';
+  static String createProfile = '$baseUrl/CreateProfile';
   static String getCartList = '$baseUrl/CartList';
   static String removeFromCart(int id) => '$baseUrl/DeleteCartList/$id';
   static String createInvoice = '$baseUrl/InvoiceCreate';

@@ -110,7 +110,7 @@ class _CartScreenState extends State<CartScreen> {
                         child: ElevatedButton(
                           onPressed: () {
                             if(Get.find<CartListController>().cartListModel.data?.isNotEmpty ?? false){
-                              Get.to(()=> CheckoutScreen());
+                              Get.to(()=> const CheckOutScreen());
                             }
                           },
                           child: const Text('Checkout'),

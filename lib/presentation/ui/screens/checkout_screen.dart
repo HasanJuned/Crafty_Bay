@@ -1,17 +1,19 @@
-import 'package:crafty_bay/data/models/payment_method.dart';
 import 'package:crafty_bay/presentation/state_holders/invoice_create_controller.dart';
+import 'package:crafty_bay/presentation/ui/screens/webview_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CheckoutScreen extends StatefulWidget {
-  const CheckoutScreen({Key? key}) : super(key: key);
+import '../../../data/models/payment_method.dart';
+
+class CheckOutScreen extends StatefulWidget {
+  const CheckOutScreen({super.key});
 
   @override
-  State<CheckoutScreen> createState() => _CheckoutScreenState();
+  State<CheckOutScreen> createState() => _CheckOutScreenState();
 }
 
-class _CheckoutScreenState extends State<CheckoutScreen> {
-
+class _CheckOutScreenState extends State<CheckOutScreen> {
   bool isCompleted = false;
 
   @override
@@ -19,11 +21,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Get.find<InvoiceCreateController>().createInvoice().then((value) {
+        isCompleted = value;
         if (mounted) {
-          isCompleted = value;
-          setState(() {
-
-          });
+          setState(() {});
         }
       });
     });
@@ -32,42 +32,38 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Checkout Screen'),
-      ),
-
-      body: GetBuilder<InvoiceCreateController>(
-        builder: (invoiceCreateController) {
-          if(invoiceCreateController.inProgress){
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          if(!isCompleted){
-            return const Center(
-              child: Text('Please complete your profile first'),
-            );
-          }
-          return ListView.separated(
-              itemCount: invoiceCreateController.invoiceCreateResponseModel?.paymentMethod?.length ?? 0,
-              itemBuilder: (context, index){
-              final PaymentMethod paymentMethod = invoiceCreateController
-                  .invoiceCreateResponseModel!.paymentMethod![index];
-              return ListTile(
-                leading: Image.network(paymentMethod.logo ?? '', width: 60,),
-                title: Text(paymentMethod.name ??''),
-                onTap: (){
-                  Get.find<InvoiceCreateController>().createInvoice();
-
+        appBar: AppBar(
+          title: const Text('Check out'),
+        ),
+        body: GetBuilder<InvoiceCreateController>(
+            builder: (controller) {
+              if (controller.inProgress) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              if (!isCompleted) {
+                return const Center(
+                  child: Text('Please complete your profile first'),
+                );
+              }
+              return ListView.separated(
+                itemCount: controller.invoiceCreateResponseModel?.paymentMethod?.length ?? 0,
+                itemBuilder: (context, index) {
+                  final PaymentMethod paymentMethod =
+                  controller.invoiceCreateResponseModel!.paymentMethod![index];
+                  return ListTile(
+                    leading: Image.network(paymentMethod.logo ?? '', width: 60,),
+                    title: Text(paymentMethod.name ?? ''),
+                    onTap: () {
+                      Get.off(() => WebViewScreen(paymentUrl: paymentMethod.redirectGatewayURL!));
+                    },
+                  );
                 },
+                separatorBuilder: (_, __) => const Divider(),
               );
-          },
-          separatorBuilder: (_,__){
-                return const Divider();
-          },
-          );
-        }
-      ),
+            }
+        )
     );
   }
 }

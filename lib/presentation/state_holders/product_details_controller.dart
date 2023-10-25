@@ -30,7 +30,7 @@ class ProductDetailsController extends GetxController {
     final NetworkResponse response = await NetworkCaller().getRequest(Urls.getProductDetails(id));
     _getProductDetailsInProgress = false;
     if (response.isSuccess) {
-      _productDetails = ProductDetailsModel.fromJson(response.responseJson ?? {}).data!.first as ProductDetails;
+      _productDetails = ProductDetailsModel.fromJson(response.responseJson ?? {}).data!.first;
       _convertStringToColor(_productDetails.color ?? '');
       _convertStringToSizes(_productDetails.size ?? '');
       update();

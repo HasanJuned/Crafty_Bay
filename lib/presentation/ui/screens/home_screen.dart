@@ -2,6 +2,7 @@ import 'package:crafty_bay/presentation/state_holders/category_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/home_slider_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_bar_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/popular_product_controller.dart';
+import 'package:crafty_bay/presentation/ui/screens/auth/complete_profile_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/product_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/app_colors.dart';
 import 'package:crafty_bay/presentation/ui/utility/image_assets.dart';
@@ -38,6 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
             CircularIconButton(
               icon: Icons.person,
               onTap: () {
+                Get.to(CompleteProfileScreen());
               },
             ),
             const SizedBox(
@@ -136,18 +138,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     }
                     return ListView.builder(
-                      itemCount:
-                      categoryController.categoryModel.data?.length ?? 0,
+                      itemCount: categoryController.categoryModel.data?.length ?? 0,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return CategoryCardWidget(
-                          categoryData:
-                          categoryController.categoryModel.data![index],
+                          categoryData: categoryController.categoryModel.data![index],
                           onTap: () {
-                            Get.to(
-                              ProductListScreen(
-                                  categoryId: categoryController
-                                      .categoryModel.data![index].id!),
+                            Get.to(ProductListScreen(categoryId: categoryController.categoryModel.data![index].id!),
                             );
                           },
                         );
@@ -163,8 +160,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: 'Popular',
                 onTap: () {
                   Get.to(
-                    ProductListScreen(
-                      productModel: Get.find<PopularProductController>().productModel,
+                    ProductListScreen(productModel: Get.find<PopularProductController>().productModel,
                     ),
                   );
                 },
@@ -180,15 +176,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     }
                     return ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: popularProductController.productModel.data?.length ??
-                          0,
+                      itemCount: popularProductController.productModel.data?.length ?? 0,
                       itemBuilder: (context, index) {
                         return Padding(
                           padding:
                           const EdgeInsets.only(top: 8, left: 4, bottom: 8),
                           child: ProductCard(
-                            productData: popularProductController
-                                .productModel.data![index],
+                            productData: popularProductController.productModel.data![index],
                           ),
                         );
                       },

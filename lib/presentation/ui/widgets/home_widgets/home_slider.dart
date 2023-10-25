@@ -41,9 +41,7 @@ class _HomeSliderState extends State<HomeSlider> {
                   child: Stack(
                     alignment: Alignment.bottomRight,
                     children: [
-                      Image.network(sliderData.image ?? '', height: double.infinity,
-                        width: double.infinity,
-                        fit: BoxFit.fitHeight,
+                      Image.network(sliderData.image ?? '', height: double.infinity, width: double.infinity,  fit: BoxFit.fitHeight,
                       ),
                       Positioned(
                         bottom: 3,
