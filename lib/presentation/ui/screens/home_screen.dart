@@ -4,6 +4,7 @@ import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_bar_contro
 import 'package:crafty_bay/presentation/state_holders/popular_product_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/auth/complete_profile_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/product_list_screen.dart';
+import 'package:crafty_bay/presentation/ui/screens/auth/read_profile_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/app_colors.dart';
 import 'package:crafty_bay/presentation/ui/utility/image_assets.dart';
 import 'package:crafty_bay/presentation/ui/widgets/category_card_widget.dart';
@@ -54,7 +55,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             CircularIconButton(
               icon: Icons.notifications_active_outlined,
-              onTap: () {},
+              onTap: () {
+                Get.to(()=> ReadProfileScreen());
+              },
             ),
             const SizedBox(
               width: 8,
