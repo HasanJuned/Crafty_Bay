@@ -9,7 +9,6 @@ class OTPVerificationController extends GetxController {
   String _message = '';
 
   bool get otpVerificationInProgress => _otpVerificationInProgress;
-
   String get message => _message;
 
   Future<bool> verifyOtp(String email, String otp) async {
