@@ -15,6 +15,7 @@ import '../presentation/state_holders/main_bottom_nav_bar_controller.dart';
 import '../presentation/state_holders/popular_product_controller.dart';
 import '../presentation/state_holders/product_list_controller.dart';
 import '../presentation/state_holders/read_profile_controller.dart';
+import '../presentation/state_holders/review_product_controller.dart';
 
 class GetXBindings extends Bindings{
   @override
@@ -34,6 +35,7 @@ class GetXBindings extends Bindings{
     Get.put(InvoiceCreateController());
     Get.put(CreateProfileController());
     Get.put(ReadProfileController());
+    Get.put(ReviewProductController());
   }
 
 }

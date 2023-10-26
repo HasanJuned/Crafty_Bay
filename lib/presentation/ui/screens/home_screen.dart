@@ -60,19 +60,8 @@ class _HomeScreenState extends State<HomeScreen> {
               width: 8,
             ),
             CircularIconButton(
-              icon: Icons.logout_outlined,
-              onTap: () {
-                AuthController.clearUserInfo();
-              },
-            ),
-            const SizedBox(
-              width: 8,
-            ),
-            CircularIconButton(
               icon: Icons.notifications_active_outlined,
-              onTap: () {
-                Get.to(() => const ReadProfileScreen());
-              },
+              onTap: () {},
             ),
             const SizedBox(
               width: 8,
@@ -83,6 +72,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 Get.changeTheme(
                   Get.isDarkMode ? ThemeData.light() : ThemeData.dark(),
                 );
+              },
+            ),
+            const SizedBox(
+              width: 8,
+            ),
+            CircularIconButton(
+              icon: Icons.logout_outlined,
+              onTap: () {
+                AuthController.clearUserInfo();
               },
             ),
           ],

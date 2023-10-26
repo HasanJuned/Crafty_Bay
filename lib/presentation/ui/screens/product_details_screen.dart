@@ -6,6 +6,7 @@ import 'package:crafty_bay/presentation/ui/widgets/home_widgets/product_image_sl
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../state_holders/review_product_controller.dart';
 import '../utility/app_colors.dart';
 import '../widgets/size_picker.dart';
 
@@ -23,6 +24,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   int _selectedColor = 0;
   int _selectedSizes = 0;
   int quantity = 1;
+
+  final TextEditingController _reviewController = TextEditingController();
+  final TextEditingController _ratingController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -215,7 +220,92 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     ],
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      showModalBottomSheet(
+                          context: (context),
+                          backgroundColor: Colors.white,
+                          barrierColor: Colors.black87,
+                          isScrollControlled: true,
+                          isDismissible: true,
+                          enableDrag: true,
+                          builder: (builder) {
+                            return SizedBox(
+                              height: 420,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Form(
+                                  key: _formKey,
+                                  child: Column(
+                                    children: [
+                                     TextFormField(
+                                       decoration: const InputDecoration(
+                                         hintText: 'About this product!'
+                                       ),
+                                       controller: _reviewController,
+                                       validator: (String? text){
+                                         if(text!.isEmpty == true){
+                                           return 'About Product';
+                                         }
+                                         return null;
+                                       },
+                                     ),
+                                      const SizedBox(height: 12,),
+                                      TextFormField(
+                                        decoration: const InputDecoration(
+                                            prefixIcon: Icon(Icons.star)
+                                        ),
+                                        controller: _ratingController,
+                                        validator: (String? text){
+                                          if(text!.isEmpty == true){
+                                            return 'Give a star';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      GetBuilder<ReviewProductController>(
+                                        builder: (reviewProductController) {
+                                          if(reviewProductController.reviewProductInProgress){
+                                            return const Center(
+                                              child: CircularProgressIndicator(),
+                                            );
+                                          }
+                                          return ElevatedButton(onPressed: () async {
+                                            if(_formKey.currentState!.validate()){
+                                              final response = await reviewProductController
+                                                  .createProductReview(
+                                                  _reviewController.text,
+                                                  widget.productId.toInt(),
+                                                _ratingController.text
+
+                                              );
+                                              if(response){
+                                                Get.showSnackbar(const GetSnackBar(
+                                                  title: 'Thank you',
+                                                  message: 'Your review added',
+                                                  backgroundColor: AppColors.primaryColor,
+                                                  duration: Duration(seconds: 2),
+                                                ),);
+                                              }else{
+                                                Get.showSnackbar(const GetSnackBar(
+                                                  title: 'Review failed!',
+                                                  message: 'Try again',
+                                                  backgroundColor: Colors.redAccent,
+                                                  duration: Duration(seconds: 2),
+                                                ),);
+                                              }
+
+                                            }
+                                          }, child: const Text('ADD'));
+                                        }
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          }
+                      );
+                    },
                     child: const Text('Review'),
                   ),
                   const Card(
