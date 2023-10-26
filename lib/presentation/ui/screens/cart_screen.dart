@@ -1,8 +1,10 @@
 import 'package:crafty_bay/presentation/state_holders/cart_list_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_bar_controller.dart';
+import 'package:crafty_bay/presentation/ui/screens/auth/complete_profile_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/checkout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../state_holders/auth_controller.dart';
 import '../utility/app_colors.dart';
 import '../widgets/cart_product_card.dart';
 
@@ -18,8 +20,14 @@ class _CartScreenState extends State<CartScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
-          (_) {
-        Get.find<CartListController>().getCartList();
+      (_) {
+        if (AuthController.readProfile == null) {
+          Get.to(CompleteProfileScreen())?.then((value) {
+            Get.find<CartListController>().getCartList();
+          });
+        } else {
+          Get.find<CartListController>().getCartList();
+        }
       },
     );
   }
@@ -60,17 +68,18 @@ class _CartScreenState extends State<CartScreen> {
                 Expanded(
                   child: ListView.builder(
                     itemCount:
-                    cartListController.cartListModel.data?.length ?? 0,
+                        cartListController.cartListModel.data?.length ?? 0,
                     itemBuilder: (context, index) {
                       return CartProductCard(
-                        cartListData: cartListController.cartListModel.data![index],
+                        cartListData:
+                            cartListController.cartListModel.data![index],
                       );
                     },
                   ),
                 ),
                 Container(
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   decoration: BoxDecoration(
                     color: AppColors.primaryColor.withOpacity(0.15),
                     borderRadius: const BorderRadius.only(
@@ -109,8 +118,12 @@ class _CartScreenState extends State<CartScreen> {
                         width: 120,
                         child: ElevatedButton(
                           onPressed: () {
-                            if(Get.find<CartListController>().cartListModel.data?.isNotEmpty ?? false){
-                              Get.to(()=> const CheckOutScreen());
+                            if (Get.find<CartListController>()
+                                    .cartListModel
+                                    .data
+                                    ?.isNotEmpty ??
+                                false) {
+                              Get.to(() => const CheckOutScreen());
                             }
                           },
                           child: const Text('Checkout'),

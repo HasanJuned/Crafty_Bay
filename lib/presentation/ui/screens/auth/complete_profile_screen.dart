@@ -1,3 +1,4 @@
+import 'package:crafty_bay/presentation/state_holders/auth_controller.dart';
 import 'package:crafty_bay/presentation/ui/utility/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -178,6 +179,7 @@ class CompleteProfileScreen extends StatelessWidget {
                               _phoneController.text,
                             );
                             if (response) {
+                              AuthController.setReadProfile(_phoneController.text);
                               Get.showSnackbar(
                                 const GetSnackBar(
                                   title: 'Welcome',

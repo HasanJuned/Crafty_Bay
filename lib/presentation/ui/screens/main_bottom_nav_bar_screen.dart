@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../state_holders/popular_product_controller.dart';
+import '../../state_holders/read_profile_controller.dart';
 
 class MainBottomNavBarScreen extends StatefulWidget {
   const MainBottomNavBarScreen({Key? key}) : super(key: key);
@@ -37,6 +38,7 @@ class _MainBottomNavBarScreenState extends State<MainBottomNavBarScreen> {
       Get.find<PopularProductController>().getPopularProducts();
       Get.find<SpecialProductController>().getSpecialProducts();
       Get.find<NewProductController>().getNewProducts();
+      Get.find<ReadProfileController>().readProfile();
     });
     super.initState();
 

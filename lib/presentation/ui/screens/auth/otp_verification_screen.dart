@@ -20,7 +20,7 @@ class OTPVerificationScreen extends StatefulWidget {
 
 class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
   final TextEditingController _otpTEController = TextEditingController();
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -142,10 +142,10 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
   }
 
   Future<void> verifyOtp(OTPVerificationController controller) async {
-    print(_otpTEController.text);
+    //print(_otpTEController.text);
 
-    final response =
-        await controller.verifyOtp(widget.email, _otpTEController.text);
+    final response = await controller.verifyOtp(widget.email, _otpTEController.text);
+
     if (response) {
       Get.offAll(const MainBottomNavBarScreen());
     } else {

@@ -3,7 +3,6 @@ import 'package:crafty_bay/presentation/state_holders/category_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/home_slider_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_bar_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/popular_product_controller.dart';
-import 'package:crafty_bay/presentation/state_holders/read_profile_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/auth/complete_profile_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/product_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/auth/read_profile_screen.dart';
@@ -39,20 +38,17 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             SvgPicture.asset(ImageAssets.craftyBayNavLogoSVG),
             const Spacer(),
-            GetBuilder<ReadProfileController>(builder: (readProfileController) {
-              return CircularIconButton(
-                icon: Icons.person,
-                onTap: () async {
-                  final response = AuthController.readProfile;
-                  print(response);
-                  if (!response!) {
-                    Get.to(() => CompleteProfileScreen());
-                  } else {
-                    Get.to(() => ReadProfileScreen());
-                  }
-                },
-              );
-            }),
+            CircularIconButton(
+              icon: Icons.person,
+              onTap: () {
+                //print(AuthController.readProfile);
+                if (AuthController.readProfile != null) {
+                  Get.to(const ReadProfileScreen());
+                } else {
+                  Get.to(CompleteProfileScreen());
+                }
+              },
+            ),
             const SizedBox(
               width: 8,
             ),
@@ -64,9 +60,18 @@ class _HomeScreenState extends State<HomeScreen> {
               width: 8,
             ),
             CircularIconButton(
+              icon: Icons.logout_outlined,
+              onTap: () {
+                AuthController.clearUserInfo();
+              },
+            ),
+            const SizedBox(
+              width: 8,
+            ),
+            CircularIconButton(
               icon: Icons.notifications_active_outlined,
               onTap: () {
-                Get.to(() => ReadProfileScreen());
+                Get.to(() => const ReadProfileScreen());
               },
             ),
             const SizedBox(
