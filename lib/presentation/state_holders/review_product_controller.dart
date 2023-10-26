@@ -10,9 +10,7 @@ class ReviewProductController extends GetxController {
   String _message = '';
 
   bool get reviewProductInProgress => _reviewProductInProgress;
-
   ReviewProductModel get reviewProductModel => _reviewProductModel;
-
   String get message => _message;
 
   Future<bool> createProductReview(

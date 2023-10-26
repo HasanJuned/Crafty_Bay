@@ -8,6 +8,7 @@ import '../presentation/state_holders/add_to_cart_controller.dart';
 import '../presentation/state_holders/cart_list_controller.dart';
 import '../presentation/state_holders/category_controller.dart';
 import '../presentation/state_holders/create_profile_controller.dart';
+import '../presentation/state_holders/create_wish_list_controller.dart';
 import '../presentation/state_holders/email_verification_controller.dart';
 import '../presentation/state_holders/home_slider_controller.dart';
 import '../presentation/state_holders/invoice_create_controller.dart';
@@ -16,6 +17,7 @@ import '../presentation/state_holders/popular_product_controller.dart';
 import '../presentation/state_holders/product_list_controller.dart';
 import '../presentation/state_holders/read_profile_controller.dart';
 import '../presentation/state_holders/review_product_controller.dart';
+import '../presentation/state_holders/show_wish_list_controller.dart';
 
 class GetXBindings extends Bindings{
   @override
@@ -36,6 +38,8 @@ class GetXBindings extends Bindings{
     Get.put(CreateProfileController());
     Get.put(ReadProfileController());
     Get.put(ReviewProductController());
+    Get.put(CreateWishListController());
+    Get.put(ShowWishListController());
   }
 
 }

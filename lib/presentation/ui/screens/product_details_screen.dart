@@ -1,5 +1,6 @@
 import 'package:crafty_bay/data/models/product_details.dart';
 import 'package:crafty_bay/presentation/state_holders/add_to_cart_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/create_wish_list_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/product_details_controller.dart';
 import 'package:crafty_bay/presentation/ui/widgets/custom_stepper.dart';
 import 'package:crafty_bay/presentation/ui/widgets/home_widgets/product_image_slider.dart';
@@ -24,6 +25,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   int _selectedColor = 0;
   int _selectedSizes = 0;
   int quantity = 1;
+  bool wishCircular = false;
 
   final TextEditingController _reviewController = TextEditingController();
   final TextEditingController _ratingController = TextEditingController();
@@ -122,12 +124,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               return ElevatedButton(
                 onPressed: () {
                   addToCartController
-                      .addToCart(
-                    details.id!,
-                    colors[_selectedColor],
-                    size[_selectedSizes],
-                    quantity
-                  )
+                      .addToCart(details.id!, colors[_selectedColor],
+                          size[_selectedSizes], quantity)
                       .then((result) {
                     if (result) {
                       Get.showSnackbar(
@@ -237,88 +235,137 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   key: _formKey,
                                   child: Column(
                                     children: [
-                                     TextFormField(
-                                       decoration: const InputDecoration(
-                                         hintText: 'About this product!'
-                                       ),
-                                       controller: _reviewController,
-                                       validator: (String? text){
-                                         if(text!.isEmpty == true){
-                                           return 'About Product';
-                                         }
-                                         return null;
-                                       },
-                                     ),
-                                      const SizedBox(height: 12,),
                                       TextFormField(
                                         decoration: const InputDecoration(
-                                            prefixIcon: Icon(Icons.star)
-                                        ),
+                                            hintText: 'About this product!'),
+                                        controller: _reviewController,
+                                        validator: (String? text) {
+                                          if (text!.isEmpty == true) {
+                                            return 'About Product';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      const SizedBox(
+                                        height: 12,
+                                      ),
+                                      TextFormField(
+                                        decoration: const InputDecoration(
+                                            prefixIcon: Icon(Icons.star)),
                                         controller: _ratingController,
-                                        validator: (String? text){
-                                          if(text!.isEmpty == true){
+                                        validator: (String? text) {
+                                          if (text!.isEmpty == true) {
                                             return 'Give a star';
                                           }
                                           return null;
                                         },
                                       ),
                                       GetBuilder<ReviewProductController>(
-                                        builder: (reviewProductController) {
-                                          if(reviewProductController.reviewProductInProgress){
-                                            return const Center(
-                                              child: CircularProgressIndicator(),
-                                            );
-                                          }
-                                          return ElevatedButton(onPressed: () async {
-                                            if(_formKey.currentState!.validate()){
-                                              final response = await reviewProductController
-                                                  .createProductReview(
-                                                  _reviewController.text,
-                                                  widget.productId.toInt(),
-                                                _ratingController.text
-
-                                              );
-                                              if(response){
-                                                Get.showSnackbar(const GetSnackBar(
-                                                  title: 'Thank you',
-                                                  message: 'Your review added',
-                                                  backgroundColor: AppColors.primaryColor,
-                                                  duration: Duration(seconds: 2),
-                                                ),);
-                                              }else{
-                                                Get.showSnackbar(const GetSnackBar(
-                                                  title: 'Review failed!',
-                                                  message: 'Try again',
-                                                  backgroundColor: Colors.redAccent,
-                                                  duration: Duration(seconds: 2),
-                                                ),);
-                                              }
-
-                                            }
-                                          }, child: const Text('ADD'));
+                                          builder: (reviewProductController) {
+                                        if (reviewProductController
+                                            .reviewProductInProgress) {
+                                          return const Center(
+                                            child: CircularProgressIndicator(),
+                                          );
                                         }
-                                      )
+                                        return ElevatedButton(
+                                            onPressed: () async {
+                                              if (_formKey.currentState!
+                                                  .validate()) {
+                                                final response =
+                                                    await reviewProductController
+                                                        .createProductReview(
+                                                            _reviewController
+                                                                .text,
+                                                            widget.productId
+                                                                .toInt(),
+                                                            _ratingController
+                                                                .text);
+                                                if (response) {
+                                                  Get.showSnackbar(
+                                                    const GetSnackBar(
+                                                      title: 'Thank you',
+                                                      message:
+                                                          'Your review added',
+                                                      backgroundColor: AppColors
+                                                          .primaryColor,
+                                                      duration:
+                                                          Duration(seconds: 2),
+                                                    ),
+                                                  );
+                                                } else {
+                                                  Get.showSnackbar(
+                                                    const GetSnackBar(
+                                                      title: 'Review failed!',
+                                                      message: 'Try again',
+                                                      backgroundColor:
+                                                          Colors.redAccent,
+                                                      duration:
+                                                          Duration(seconds: 2),
+                                                    ),
+                                                  );
+                                                }
+                                              }
+                                            },
+                                            child: const Text('ADD'));
+                                      })
                                     ],
                                   ),
                                 ),
                               ),
                             );
-                          }
-                      );
+                          });
                     },
                     child: const Text('Review'),
                   ),
-                  const Card(
-                    color: AppColors.primaryColor,
-                    child: Padding(
-                      padding: EdgeInsets.all(2.0),
-                      child: Icon(
-                        Icons.favorite_border_outlined,
-                        color: Colors.white,
-                        size: 16,
+                  GetBuilder<CreateWishListController>(
+                      builder: (createWishListController) {
+                    if (createWishListController.createWishListInProgress) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    return Card(
+                      color: wishCircularMethod(),
+                      child: Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: InkWell(
+                          onTap: () async {
+                            final response = await createWishListController
+                                .createWishList(widget.productId);
+                            if (response) {
+                              wishCircular = true;
+                              Get.showSnackbar(
+                                const GetSnackBar(
+                                  title: 'Welcome',
+                                  message:
+                                      'This product added to your wishlist',
+                                  backgroundColor: AppColors.primaryColor,
+                                  duration: Duration(seconds: 2),
+                                ),
+                              );
+                            } else {
+                              Get.showSnackbar(
+                                const GetSnackBar(
+                                  title: 'Failed to add wishlist!',
+                                  message: 'Try again',
+                                  backgroundColor: Colors.redAccent,
+                                  duration: Duration(seconds: 2),
+                                ),
+                              );
+                            }
+                          },
+                          child: const Icon(
+                            Icons.favorite_border_outlined,
+                            color: Colors.white,
+                            size: 16,
+                          ),
+                        ),
                       ),
-                    ),
-                  )
+
+
+                    );
+                  })
                 ],
               ),
               const Text(
@@ -374,5 +421,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         ),
       ),
     );
+  }
+  wishCircularMethod(){
+    return wishCircular == true ? Colors.redAccent : AppColors.primaryColor;
+
   }
 }
