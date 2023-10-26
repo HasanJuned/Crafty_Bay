@@ -12,8 +12,11 @@ import 'package:crafty_bay/presentation/ui/widgets/category_card_widget.dart';
 import 'package:crafty_bay/presentation/ui/widgets/home_widgets/home_slider.dart';
 import 'package:crafty_bay/presentation/ui/widgets/remarks_title.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import '../../state_holders/new_product_controller.dart';
 import '../../state_holders/special_product_controller.dart';
 import '../widgets/circular_icon_button.dart';
@@ -54,7 +57,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             CircularIconButton(
               icon: Icons.call_outlined,
-              onTap: () {},
+              onTap: () async {
+                launchUrlString("tel://${008801716874981}");
+              },
             ),
             const SizedBox(
               width: 8,

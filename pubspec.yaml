@@ -22,6 +22,8 @@ dependencies:
   shared_preferences: any
   connectivity_plus: ^5.0.1
   webview_flutter: any
+  flutter_phone_direct_caller: ^2.1.1
+  url_launcher: ^6.0.7
 
 dev_dependencies:
   flutter_test:
