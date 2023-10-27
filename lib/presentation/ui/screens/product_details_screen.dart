@@ -1,7 +1,9 @@
 import 'package:crafty_bay/data/models/product_details.dart';
 import 'package:crafty_bay/presentation/state_holders/add_to_cart_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/auth_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/create_wish_list_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/product_details_controller.dart';
+import 'package:crafty_bay/presentation/ui/screens/auth/complete_profile_screen.dart';
 import 'package:crafty_bay/presentation/ui/widgets/custom_stepper.dart';
 import 'package:crafty_bay/presentation/ui/widgets/home_widgets/product_image_slider.dart';
 import 'package:flutter/material.dart';
@@ -123,27 +125,31 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               }
               return ElevatedButton(
                 onPressed: () {
-                  addToCartController
-                      .addToCart(details.id!, colors[_selectedColor],
-                          size[_selectedSizes], quantity)
-                      .then((result) {
-                    if (result) {
-                      Get.showSnackbar(
-                        const GetSnackBar(
-                          title: 'Added to Cart',
-                          message: 'This product has been added to cart',
+                  if(AuthController.readProfile != null){
+                    addToCartController.addToCart(details.id!, colors[_selectedColor],
+                        size[_selectedSizes], quantity)
+                        .then((result) {
+                      if (result) {
+                        Get.showSnackbar(
+                          const GetSnackBar(
+                            title: 'Added to Cart',
+                            message: 'This product has been added to cart',
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
+                      } else {
+                        Get.showSnackbar(const GetSnackBar(
+                          title: 'Failed to add cart',
+                          message: 'Try again!',
                           duration: Duration(seconds: 2),
-                        ),
-                      );
-                    } else {
-                      Get.showSnackbar(const GetSnackBar(
-                        title: 'Failed to add cart',
-                        message: 'Try again!',
-                        duration: Duration(seconds: 2),
-                        backgroundColor: Colors.redAccent,
-                      ));
-                    }
-                  });
+                          backgroundColor: Colors.redAccent,
+                        ));
+                      }
+                    });
+                  }else{
+                    Get.to(CompleteProfileScreen());
+                  }
+
                 },
                 child: const Text('Add to Cart'),
               );

@@ -72,9 +72,11 @@ class _HomeScreenState extends State<HomeScreen> {
             CircularIconButton(
               icon: Icons.light_mode_outlined,
               onTap: () {
-                Get.changeTheme(
-                  Get.isDarkMode ? ThemeData.light() : ThemeData.dark(),
-                );
+                if (Get.isDarkMode) {
+                  Get.changeThemeMode(ThemeMode.light);
+                } else {
+                  Get.changeThemeMode(ThemeMode.dark);
+                }
               },
             ),
             const SizedBox(

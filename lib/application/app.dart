@@ -1,7 +1,5 @@
 import 'dart:async';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_bar_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/splash_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -85,7 +83,7 @@ class _CraftyBayState extends State<CraftyBay> {
                 OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
           )),
       darkTheme: ThemeData(
-        brightness: Brightness.light,
+        brightness: Brightness.dark,
           primarySwatch:
               MaterialColor(AppColors.primaryColor.value, AppColors().color),
           elevatedButtonTheme: ElevatedButtonThemeData(
