@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AuthController {
   static String? _accessToken;
   static String? _readProfile;
+  static String? themeMode;
 
   static String? get accessToken => _accessToken;
   static String? get readProfile => _readProfile;
@@ -49,4 +50,22 @@ class AuthController {
   static bool isLoggedIn() {
     return _accessToken != null;
   }
+
+  static Future<void> setThemeMode(String ans) async {
+    final SharedPreferences sharedPreferences =
+    await SharedPreferences.getInstance();
+    await sharedPreferences.setString('theme_mode', ans);
+    themeMode = ans;
+  }
+
+  static Future<void> getTheme() async {
+    final SharedPreferences sharedPreferences =
+    await SharedPreferences.getInstance();
+    themeMode = sharedPreferences.getString('theme_mode');
+  }
+
+
+
+
+
 }
