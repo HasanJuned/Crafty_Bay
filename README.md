@@ -6,7 +6,7 @@ This is an E-Commerce project with payment gateway api implementation.
 Link: [APK](https://drive.google.com/file/d/1HAZjpmwKCssXxOJjidWX7Ho0qvHPbLJo/view?usp=sharing)
 
 # Documentation 
-Link: [PDF](https://github.com/HasanJuned/Crafty_Bay/files/13189860/Hasan_Crafty_Bay_Documentation.pdf)
+Link: [PDF](https://drive.google.com/file/d/1QezFknLlKexvSLONr4tKjZ0lFWFKyyy3/view?usp=sharing)
 
 
 # Video link
