@@ -10,3 +10,4 @@ Link: [PDF](https://drive.google.com/file/d/1QezFknLlKexvSLONr4tKjZ0lFWFKyyy3/vi
 
 
 # Video link
+Link: [video](https://drive.google.com/file/d/1duUO0mTRpOabhhutBr5tAYfRDYH16lQu/view?usp=sharing)
