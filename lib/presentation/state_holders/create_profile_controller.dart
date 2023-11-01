@@ -50,4 +50,4 @@ class CreateProfileController extends GetxController {
     }
   }
 }
-///
+/////
