@@ -40,11 +40,12 @@ product. Others can only view the available products.
 
 # I have tried to follow MVVM architecture.
 └── lib/
-
 ├── application/
 
-│ ├── app.dart
-│ └── state_holder_binders.dart
+│ 
+├── app.dart
+│ 
+└── state_holder_binders.dart
 ├── data/
 │ ├── models/
 │ │ └── model files are here
