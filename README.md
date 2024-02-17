@@ -28,7 +28,7 @@ product. Others can only view the available products.
 
 # I have used the following tools in this project:
 ● Flutter
-● GetX for state management
+● GetX
 ● API
 
 # I have tried to follow MVVM architecture.
