@@ -31,7 +31,7 @@ product. Others can only view the available products.
 ● GetX for state management
 ● API
 
-# I have tried to follow MVP architecture.
+# I have tried to follow MVVM architecture.
 └── lib/
 ├── application/
 │ ├── app.dart
