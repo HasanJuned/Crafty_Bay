@@ -21,10 +21,15 @@ product. Others can only view the available products.
 
 # Interesting features:
 ● Checking internet connection
+
 ● Light / dark mode
+
 ● Payment gateway
+
 ● Calling customer support via directly opening the phone number pad
+
 ● Check whether the user is registered or not for before placing order
+
 
 # I have used the following tools in this project:
 ● Flutter
